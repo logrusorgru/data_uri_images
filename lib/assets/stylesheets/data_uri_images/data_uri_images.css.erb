@@ -7,17 +7,30 @@
 
 /* Этот хелпер вставляет все необходимые классы с data URI для изображений */
 <%= result = ""
+	# результаты записываются в result
+	# search_path - путь поиска - путь откуда беруться изображения для
+	#   добавления их в css
+	#   путь должен быть путём ассетов, т.к. используется хелпер asset_data_uri
 	search_path = "#{Rails.root}/app/assets/images/uri"
+	# все файлы и папки из search_path рекурсивно
 	files = Dir.glob "#{search_path}/**/*"
+	# цикл по массиву дерева поиска
 	files.each do |file|
-		if File.directory? file
-			files.delete(file)
-		else
-			file.gsub! /^#{search_path[0...-3]}/, ""
-			result += ".#{file.gsub(/\./, "_").gsub(/\//, "_")}"
-			result += " { background-image: url( "
-			result += "#{asset_data_uri( file )}"
-			result += " ) !important; } \n"
-		end
+		# пропуск - если папка
+		next File.directory? file
+		# обрезка по пути не считая 'uri' : 
+		#   /home/pro/my_app/app/assets/images/uri/subfolder/file.ext
+		#   превращается в uri/subfolder/file.ext
+		#   Будьте внимательны при использовании иных путей!
+		#   Т.к. search_path[0...-3] - расчита на директорий 'uri' (3 символа)
+		file.gsub! /^#{search_path[0...-3]}/, ""
+		# Замена точек и '/' на '_'
+		result += ".#{file.gsub(/\./, "_").gsub(/\//, "_")}"
+		# генерация свойства CSS 'background-image'
+		result += " { background-image: url( "
+		# вставка data URI хэша
+		result += "#{asset_data_uri( file )}"
+		# добавление директивы !important на всякий случай
+		result += " ) !important; } \n"
 	end
 	result %>
