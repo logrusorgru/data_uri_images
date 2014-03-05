@@ -1,0 +1,23 @@
+/* data_uri_images.css.erb */
+
+.uri{
+	background-size: contain !important;
+	background-repeat: no-repeat !important;
+}
+
+/* Этот хелпер вставляет все необходимые классы с data URI для изображений */
+<%= result = ""
+	search_path = "#{Rails.root}/app/assets/images/uri"
+	files = Dir.glob "#{search_path}/**/*"
+	files.each do |file|
+		if File.directory? file
+			files.delete(file)
+		else
+			file.gsub! /^#{search_path[0...-3]}/, ""
+			result += ".#{file.gsub(/\./, "_").gsub(/\//, "_")}"
+			result += " { background-image: url( "
+			result += "#{asset_data_uri( file )}"
+			result += " ) !important; } \n"
+		end
+	end
+	result %>
