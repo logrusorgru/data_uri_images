@@ -17,7 +17,7 @@
 	# цикл по массиву дерева поиска
 	files.each do |file|
 		# пропуск - если папка
-		next File.directory? file
+		next if File.directory? file
 		# обрезка по пути не считая 'uri' : 
 		#   /home/pro/my_app/app/assets/images/uri/subfolder/file.ext
 		#   превращается в uri/subfolder/file.ext
