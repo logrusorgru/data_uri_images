@@ -9,4 +9,7 @@ module DataUriImages::Insert
       ActionView::Helpers::FormBuilder.send(:include, DataUriImages::FormBuilder)
     end
   end
+
+  class Engine < ::Rails::Engine
+  end
 end
