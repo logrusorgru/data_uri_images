@@ -1,5 +1,5 @@
 require File.join( File.dirname(__FILE__), 'data_uri_images', 'version' )
-require File.join( File.dirname(__FILE__), 'app', 'helpers', 'data_uri_images_form_helper' )
+require File.join( File.dirname(__FILE__), 'helpers', 'data_uri_images_form_helper' )
 
 module DataUriImages::Insert
   class Railtie < Rails::Railtie
