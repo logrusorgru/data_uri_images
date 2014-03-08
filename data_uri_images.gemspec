@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = DataUriImages::VERSION
   spec.authors       = ["Konstantin Ivanov"]
   spec.email         = ["ivanov.konstantin@logrus.org.ru"]
-  spec.summary       = %q{Provide div html elements with background image, it's stores in css file as data uri hash}
+  spec.summary       = %q{Provide pseudo-images, it's stores in css file as data uri hash}
   #spec.description   = %q{TODO: Write a longer description. Optional.}
   spec.homepage      = "http://github.com/logrusorgru/data_uri_images"
   spec.license       = "MIT"
