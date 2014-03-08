@@ -144,7 +144,7 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 
 ## Демо
 
-[Рабочая демка](http://data-uri-images-on.herokuapp.com/) и для сравнения &mdash; она же &mdash; но [без использования гема](http://data-uri-images-off.herokuapp.com/)
+[**Рабочая демка**](http://data-uri-images-on.herokuapp.com/)&nbsp;[[source](https://github.com/logrusorgru/data-uri-images-on)] и для сравнения &mdash; она же &mdash; но [**без использования гема**](http://data-uri-images-off.herokuapp.com/)&nbsp;[[source](https://github.com/logrusorgru/data-uri-images-off)]
 
 ## IE 6,7,8
 
