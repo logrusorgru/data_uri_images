@@ -85,9 +85,9 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 
 ```html
 
-    ...
-    <input class="uri uri_controls_search_png" type="image"  alt="Search"
-     src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" />
+...
+<input class="uri uri_controls_search_png" type="image"  alt="Search"
+ src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" />
 ```
 
 *haml*
@@ -103,9 +103,9 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 
 ```html
 
-    ...
-    <input class="uri uri_edit_commit_png" type="image"  alt="Commit"
-     src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" />
+...
+<input class="uri uri_edit_commit_png" type="image"  alt="Commit"
+ src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" />
 ```
 
 ## CSS классы
