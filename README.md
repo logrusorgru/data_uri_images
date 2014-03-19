@@ -6,6 +6,7 @@
 
 Поддержка - все нормальные браузеры (и `IE9+`).
 
+
 ## Установка
 
 
@@ -13,7 +14,7 @@
 
 ```ruby
 
-gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
+gem 'data_uri_images', :github => 'logrusorgru/data_uri_images', :tag => 'v0.0.1'
 ```
 
 
