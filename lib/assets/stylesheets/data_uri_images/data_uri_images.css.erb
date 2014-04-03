@@ -22,14 +22,23 @@
 		#   /home/pro/my_app/app/assets/images/uri/subfolder/file.ext
 		#   превращается в uri/subfolder/file.ext
 		#   Будьте внимательны при использовании иных путей!
-		#   Т.к. search_path[0...-3] - расчита на директорий 'uri' (3 символа)
+		#   Т.к. search_path[0...-3] - расчитан на директорий 'uri' (3 символа)
 		file.gsub! /^#{search_path[0...-3]}/, ""
 		# Замена точек и '/' на '_'
 		result += ".#{file.gsub(/\./, "_").gsub(/\//, "_")}"
 		# генерация свойства CSS 'background-image'
 		result += " { background-image: url( "
 		# вставка data URI хэша
-		result += "#{asset_data_uri( file )}"
+		# Для SVG не кодируем если указана такая опция,
+		# проверка - является ли файл SVG-изображением по расширению файла.
+		if File.extname( file ) == '.svg' && DataUriImages.config.svg == :pure
+			# чистогановый SVG
+			result += "\"data:image/svg+xml,"
+			result += IO.read( file ).gsub("\n", " ").strip.gsub("\\","\\\\").gsub("\"","\\\"") << "\""
+		else
+			# кодирование в base64
+			result += "#{asset_data_uri( file )}"
+		end
 		# добавление директивы !important на всякий случай
 		result += " ) !important; } \n"
 	end

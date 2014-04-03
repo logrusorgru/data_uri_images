@@ -14,7 +14,7 @@
 
 ```ruby
 
-gem 'data_uri_images', :github => 'logrusorgru/data_uri_images', :tag => 'v0.0.1'
+gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 ```
 
 
