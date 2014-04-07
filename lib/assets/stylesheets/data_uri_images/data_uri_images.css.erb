@@ -23,7 +23,6 @@
 		#   превращается в uri/subfolder/file.ext
 		#   Будьте внимательны при использовании иных путей!
 		#   Т.к. search_path[0...-3] - расчитан на директорий 'uri' (3 символа)
-		tmp_path = file
 		file.gsub! /^#{search_path[0...-3]}/, ""
 		# Замена точек и '/' на '_'
 		result += ".#{file.gsub(/\./, "_").gsub(/\//, "_")}"
@@ -35,7 +34,7 @@
 		if File.extname( file ) == '.svg' && DataUriImages.config.svg == :pure
 			# чистогановый SVG
 			result += "\"data:image/svg+xml,"
-			result += IO.read( tmp_path ).gsub("\n", " ").strip.gsub("\\","\\\\").gsub("\"","\\\"") << "\""
+			result += IO.read( "#{search_path[0...-3]}#{file}" ).gsub("\n", " ").strip.gsub("\\","\\\\").gsub("\"","\\\"") << "\""
 		else
 			# кодирование в base64
 			result += "#{asset_data_uri( file )}"
