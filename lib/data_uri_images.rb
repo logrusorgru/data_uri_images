@@ -4,6 +4,18 @@ require File.join( File.dirname(__FILE__), 'data_uri_images', 'railtie' ) # if d
 require File.join( File.dirname(__FILE__), 'data_uri_images', 'engine' )
 
 module DataUriImages #::Insert
+  # конфиги
+  class Config
+    attr_accessor :svg
+  end
+
+  def self.config
+    @@config ||= Config.new
+  end
+
+  def self.configure
+    yield self.config
+  end
 
   ###
   ### Вынесено в `require`
