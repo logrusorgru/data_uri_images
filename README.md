@@ -59,6 +59,11 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 
     *= require data_uri_images
 
+
+Если Вы пользуетесь `SASS` или `SCSS` - то можете вместо этого (строки выше) использовать диррективу `@import` вот так:
+
+    @import 'data_uri_images/data_uri_images';
+
 <!-- (Or install it yourself as:
 
     $ gem install data_uri_images) -->
