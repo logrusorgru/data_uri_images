@@ -21,7 +21,9 @@ module DataUriImages
       # На просторах сети встречались и более коротки GIF - однако они не
       # корректно вели себя - отказывались отображаться в Opera, былы чёрными в
       # FF
-      blank_gif = "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+      blank_body = "R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+      blank_gif = "data:image/gif;base64,".concat config.complite_escape ?
+          Rack::Utils.escape( blank_body ) : blank_body
       #
       options[:class] ||= "" #  if options[:class].blank?
       # добавляем класс 'uri' и класс соответствующий изображению

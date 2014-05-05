@@ -1,45 +1,15 @@
 /* data_uri_images.css.erb */
 
+/* вставка используемого модуля */
+/* может стоить заменить на DataUriImages::CoreHelper ???  */
+<% environment.context_class.instance_eval { include DataUriImages::CoreHelper; } %>
+
 .uri{
 	background-size: contain !important;
 	background-repeat: no-repeat !important;
 }
 
 /* Этот хелпер вставляет все необходимые классы с data URI для изображений */
-<%= result = ""
-	# результаты записываются в result
-	# search_path - путь поиска - путь откуда беруться изображения для
-	#   добавления их в css
-	#   путь должен быть путём ассетов, т.к. используется хелпер asset_data_uri
-	search_path = "#{Rails.root}/app/assets/images/uri"
-	# все файлы и папки из search_path рекурсивно
-	files = Dir.glob "#{search_path}/**/*"
-	# цикл по массиву дерева поиска
-	files.each do |file|
-		# пропуск - если папка
-		next if File.directory? file
-		# обрезка по пути не считая 'uri' : 
-		#   /home/pro/my_app/app/assets/images/uri/subfolder/file.ext
-		#   превращается в uri/subfolder/file.ext
-		#   Будьте внимательны при использовании иных путей!
-		#   Т.к. search_path[0...-3] - расчитан на директорий 'uri' (3 символа)
-		file.gsub! /^#{search_path[0...-3]}/, ""
-		# Замена точек и '/' на '_'
-		result += ".#{file.gsub(/\./, "_").gsub(/\//, "_")}"
-		# генерация свойства CSS 'background-image'
-		result += " { background-image: url( "
-		# вставка data URI хэша
-		# Для SVG не кодируем если указана такая опция,
-		# проверка - является ли файл SVG-изображением по расширению файла.
-		if File.extname( file ) == '.svg' && DataUriImages.config.svg == :pure
-			# чистогановый SVG
-			result += "\"data:image/svg+xml,"
-			result += IO.read( "#{search_path[0...-3]}#{file}" ).gsub("\n", " ").strip.gsub("\\","\\\\").gsub("\"","\\\"") << "\""
-		else
-			# кодирование в base64
-			result += "#{asset_data_uri( file )}"
-		end
-		# добавление директивы !important на всякий случай
-		result += " ) !important; } \n"
-	end
-	result %>
+<%= data_uri_css_is_here %>
+
+/* ололо */
