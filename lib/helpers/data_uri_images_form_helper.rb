@@ -23,7 +23,7 @@ module DataUriImages
       # корректно вели себя - отказывались отображаться в Opera, былы чёрными в
       # FF
       blank_body = "R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-      blank_gif = "data:image/gif;base64,".concat DataUriImages.config.complite_escape ?
+      blank_gif = "data:image/gif;base64,".concat DataUriImages.config.complete_escape ?
           Rack::Utils.escape( blank_body ) : blank_body
       #
       options[:class] ||= "" #  if options[:class].blank?
