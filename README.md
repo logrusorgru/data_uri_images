@@ -54,7 +54,7 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images', :tag => 'v0.0.2
       любое другое значение будет кодировать их по методу <code>encode</code> - это значение по умолчанию.
       Пример "чиcтого" <code>svg</code>
 <div class="highlight highlight-svg"><pre>
-data:image/svg+xml,<svg height='200' width='200' xmlns='http://www.w3.org/2000/svg'><text x="15" y="15" fill="red" transform="rotate(30 20,40)">I love SVG</text></svg>
+data:image/svg+xml,&lt;svg height='200' width='200' xmlns='http://www.w3.org/2000/svg'&gt;&lt;text x="15" y="15" fill="red" transform="rotate(30 20,40)"&gt;I love SVG&lt;/text&gt;&lt;/svg&gt;
 </pre></div>
 Вобще говоря - <code>SVG</code> с текстом (как в примере выше), мало где отображаются корректно, однако Вы можете скопировать эту строку в адресную строку браузера и взглянуть. Идея навеяна вот от [сюда](http://r.va.gg/2012/05/data-uri-svg.html), а вот тематический [fiddle](http://jsfiddle.net/rvagg/exULa/).</dd>
   <dt>prefix</dt>
