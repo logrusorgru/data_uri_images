@@ -8,24 +8,34 @@
 
 ## Версия
 
-Текущая версия `0.0.2` для использования старой версии `0.0.1` используйте следующую строку в `Gemfile`
+Текущая версия `0.1.0` для использования старых версий используйте следующие строки в `Gemfile`
+
+Для версии `0.0.1`
 
 ```ruby
 gem 'data_uri_images', :github => 'logrusorgru/data_uri_images', :tag => 'v0.0.1'
 ```
+Для версии `0.0.2`
+
+```ruby
+gem 'data_uri_images', :github => 'logrusorgru/data_uri_images', :tag => 'v0.0.2'
+```
 
 ## Добавлено:
 
-* Возможность использовать чистый `svg` вместо `base64` хэша, для того случая если Вы используете `SVG`. Вот пример `URI`:
+* Добавлена возможность выбирать дирркторий для поиска `prefix`
 
-```svg
-data:image/svg+xml,<svg height='200' width='200' xmlns='http://www.w3.org/2000/svg'><text x="15" y="15" fill="red" transform="rotate(30 20,40)">I love SVG</text></svg>
-```
-Вобще говоря - SVG с текстом (как в примере выше), мало где отображаются корректно, однако Вы можете скопировать эту строку в адресную строку браузера и взглянуть. Идея навеяна вот от [сюда](http://r.va.gg/2012/05/data-uri-svg.html), а вот тематический [fiddle](http://jsfiddle.net/rvagg/exULa/).
+* Добавлена возможность кодировать не только в `base64` но и в `ACSII`
 
-Ну и насчёт кавычек `"` - они превращаются в escape-оследовательность `\"`, рекомендуется использовать одинарные кавычки `'` вместо двойных - там где это возможно, для экономии места (размера) и во избежании тупняков со стороны браузеров.
+* Добавлена возможность полной маскировки спецсимволов (на выбор)
 
-Возможность не включается автоматически, её нужно подключить - например так:
+* Опции предварительной обработки `SVG` изображений
+
+* Возможность не кодировать `SVG` файлы, а использовать их чистыми
+
+## Настройки
+
+Все настройки включаются в файле `app/config/application.rb`, например так
 
 ```ruby
 # app/config/application.rb
@@ -36,8 +46,42 @@ data:image/svg+xml,<svg height='200' width='200' xmlns='http://www.w3.org/2000/s
   end
 # ...
 ```
+Возможные настройки
 
-Возможно подключить только все SVG или не одного. Единственное возможное значение `:pure` - включает чистый svg, любое другое значение включит `base64` хэш вместо этого.
+<dl>
+  <dt>`svg`</dt>
+  <dd>Установите значение в `:pure` если хотите не кодировать `SVG`-файлы,
+      любое другое значение будет кодировать их по методу `encode` - это значение по умолчанию.
+      Пример "читого" `svg`
+
+```svg
+data:image/svg+xml,<svg height='200' width='200' xmlns='http://www.w3.org/2000/svg'><text x="15" y="15" fill="red" transform="rotate(30 20,40)">I love SVG</text></svg>
+```
+Вобще говоря - `SVG` с текстом (как в примере выше), мало где отображаются корректно, однако Вы можете скопировать эту строку в адресную строку браузера и взглянуть. Идея навеяна вот от [сюда](http://r.va.gg/2012/05/data-uri-svg.html), а вот тематический [fiddle](http://jsfiddle.net/rvagg/exULa/).</dd>
+  <dt>`prefix`</dt>
+  <dd>Дирректорий для поиска, по умолчанию `images/uri`. Вы можете указать любой другой,
+      но это должен быть один из дирреториев ассетов</dd>
+  <dt>`encode`</dt>
+  <dd>Метод кодиования - по умолчанию это `base64`, можно установить в `:acsii`</dd>
+  <dt>`minimalize_quotes`</dt>
+  <dd>Эта опция для актуально только для не кодированных `SVG`-файлов. По умолчанию установлен в
+      `false`, при установке в `true` во всех `SVG`-файлах будет проведена оптимизация количества кавычек.
+      Суть в том, что в `css`-файле это выглядит примерно так
+```css
+.u0_svg{
+  background-image: url("data:image/svg+xml,<svg xmlns=...><path fill=\"#000\"> ... </svg>") !important;
+}
+```
+      т.е. двойные кавычки маскируются слэшем '\"'. При оптимизации двойные кавычки будут заменены на одинарные,
+      если итоговы размер от этого уменьшится.
+      </dd>
+  <dt>`replace_hex_to_rgb`</dt>
+  <dd>Актуально для читого `SVG` - замена цветов `hex` на `rgb()` - имеет смысл в Opera и FF например, т.к. у них проблемы с восприятием неэкранированной решётки `#`. Переход на `rgb()` её решает.</dd>
+  <dt>`complete_escape`</dt>
+  <dd>Полное экранирование. По умолчанию `false`. При установке в `true` Ваш `css` станет полностью валидным,
+   но от этого серьёзно возрастает размер файла.</dd>
+</dl>
+
 
 ## Установка
 
@@ -57,12 +101,15 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 
 Добавьте строку в стили приложения `app/assets/styleshets/application.css`:
 
-    *= require data_uri_images
-
+```css
+*= require data_uri_images
+```
 
 Если Вы пользуетесь `SASS` или `SCSS` - то можете вместо этого (строки выше) использовать диррективу `@import` вот так:
 
-    @import 'data_uri_images/data_uri_images';
+```scss
+@import 'data_uri_images/data_uri_images';
+```
 
 <!-- (Or install it yourself as:
 
@@ -88,10 +135,10 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 
 ```haml
 
-= helper_metod_name 'uri/image_file.ext', attr_hash
+= helper_metod_name 'image_file.ext', attr_hash
 ```
 
-`uri/image_file.ext` - путь к файлу изображению *(важно задавать его именно так, а не через* `image_path` *или* `asset_path`*)*. Далее следует стандартный хэш  с атрибутами html-тэга.
+`image_file.ext` - путь к файлу изображению *(важно задавать его именно так, а не через* `image_path` *или* `asset_path`*)*. Далее следует стандартный хэш  с атрибутами html-тэга.
 
 
 ##### Примеры
@@ -100,14 +147,14 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 
 ```haml
 
-  = uri_image 'uri/logo.png', class: 'img96x96', id: 'logo_id'
+  = uri_image 'logo.png', class: 'img96x96', id: 'logo_id'
 ```
 
 *html*-выхлоп
 
 ```html
 
-    <div class="img96x96 uri uri_logo_png" id="logo_id"></div>
+    <div class="img96x96 uri logo_png" id="logo_id"></div>
 ```
 
 *haml*
@@ -116,7 +163,7 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 
 = form_tag '/search', method: 'get' do
   = text_field_tag :q
-  = uri_submit_tag 'uri/controls/search.png', title: 'Найти'
+  = uri_submit_tag 'controls/search.png', title: 'Найти'
 ```
 
 *html*-выхлоп
@@ -124,7 +171,7 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 ```html
 
 ...
-<input class="uri uri_controls_search_png" type="image"  alt="Search"
+<input class="uri controls_search_png" type="image"  alt="Search"
  src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" />
 ```
 
@@ -134,7 +181,7 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 
 = form_for @post do |f|
   = f.text_field :content, required: true
-  = f.uri_submit 'uri/edit/commit.png'
+  = f.uri_submit 'edit/commit.png'
 ```
 
 *html*-выхлоп
@@ -142,13 +189,13 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 ```html
 
 ...
-<input class="uri uri_edit_commit_png" type="image"  alt="Commit"
+<input class="uri edit_commit_png" type="image"  alt="Commit"
  src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" />
 ```
 
 ## CSS классы
 
-Каждому элементу внедрённому с помощью упомянутых выше хелперов добавляются два CSS-класса: `uri` и `uri_path_filename_ext`. Первый класс один для всех - второй, генерруется для каждого изображения в папке `app/assets/images/uri`
+Каждому элементу внедрённому с помощью упомянутых выше хелперов добавляются два CSS-класса: `uri` и `path_filename_ext`. Первый класс один для всех - второй, генерруется для каждого изображения в папке `app/assets/images/uri`
 
 ```css
 
@@ -158,7 +205,7 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 }
 
 /* пример для файла app/assets/images/uri/edit/commit.png */
-.uri_edit_commit_png{
+.edit_commit_png{
   background-image: url(data:image/png;base64,*** data uri хэш ***) !important;
 }
 ```
@@ -195,11 +242,6 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 
 * Сделать возвожным автоматическую перезагрузку файла - при изменении в дирректории `app/assets/images/uri`. На текущий момент приходиться возиться вплоть до удаления `app/tmp/cache/assets` =) 
 Ожидайте в новых версиях.
-
-* Предоставить возможность для выбора дирректория для сканирования или ( на выбор ) списка файлов вместо стандартного пути `app/assets/images/uri`
-
-* Добавить хелпер для вставки duta_uri в набор хелперов.
-
 
 ## Контрибуция
 

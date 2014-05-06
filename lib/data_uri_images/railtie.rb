@@ -37,8 +37,7 @@ module DataUriImages::Insert
         #   default = uri/
         #   В итоге изображения будут браться из папки root_path/prefix
         #     по умолчанию это "#{Rails.root}/app/assets/images/uri"
-        # encode    : [ :default, :base64, :ascii ]
-        #   default = base64
+        # encode    : [ :base64, :ascii ]
         # :minimalize_quotes = true/false
         #   минимизация кавычек - идёт замена двойных на одинарные, если от
         #   этого итоговая строка будет меньше. Имеет смысл только при
@@ -47,7 +46,7 @@ module DataUriImages::Insert
         #   аналогично нужен только при svg = :pure
         #   дабы не было проблем с '#' в итоговой строке подменяет все(!)
         #   значения типа #fff, #098af3 на типа rgb(234,25,254)
-        # complite_escape - полное экранирование спецсимволов,
+        # complete_escape - полное экранирование спецсимволов,
         #   по дефолту в тру, строка перед выхлопом проходит через
         #   Rack::Urils.escape и при этом раздувается нереально,
         #   учитывайте, что браузеры хавают одинаково - полностью экранированные
@@ -60,15 +59,15 @@ module DataUriImages::Insert
         #     Midiri
         #     Konqueror
         config.svg                = app.config.data_uri_images[:svg] || nil
-        config.encode             = app.config.data_uri_images[:encode] || nil
+        config.encode             = app.config.data_uri_images[:encode] || :base64
         config.prefix             =
                 app.config.data_uri_images[:prefix] || "images/uri"
         config.minimalize_quotes  =
                 app.config.data_uri_images[:minimalize_quotes] || false
         config.replace_hex_to_rgb =
                 app.config.data_uri_images[:replace_hex_to_rgb] || false
-        config.complite_escape    =
-                app.config.data_uri_images[:complite_escape] || true
+        config.complete_escape    =
+                app.config.data_uri_images[:complete_escape] || false
     	end
 
   	end

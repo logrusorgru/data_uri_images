@@ -8,7 +8,7 @@ module DataUriImages #::Insert
   # конфиги
   class Config
     attr_accessor :svg, :prefix, :encode, :minimalize_quotes,
-                  :replace_hex_to_rgb, :complite_escape
+                  :replace_hex_to_rgb, :complete_escape
     # svg       : [ nil, :pure, :ascii ]
     #   default - nil ( the same )
     # prefix    : [ nil, path ]

@@ -1,15 +1,17 @@
+
 /* data_uri_images.css.erb */
 
-/* вставка используемого модуля */
-/* может стоить заменить на DataUriImages::CoreHelper ???  */
+<%#=                   /* inlude module helper */                                %>
 <% environment.context_class.instance_eval { include DataUriImages::CoreHelper; } %>
+
+<%= "processed:  #{ Time.now }\n" %>
 
 .uri{
 	background-size: contain !important;
 	background-repeat: no-repeat !important;
 }
 
-/* Этот хелпер вставляет все необходимые классы с data URI для изображений */
+/* insert css classes */
 <%= data_uri_css_is_here %>
 
-/* ололо */
+/* ololo */

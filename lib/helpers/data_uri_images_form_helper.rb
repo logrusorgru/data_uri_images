@@ -8,6 +8,7 @@ module DataUriImages
     # простое изображение
     def uri_image image_file, options = {}
       options[:class] ||= "" #  if options[:class].blank?
+      image_file = image_file[1..-1] if image_file[0] == '/'
       options[:class] += " uri " + image_file.gsub(/\./, "_").gsub(/\//, "_")
       middle = ""
       options.each{ |k,v| middle += "#{k}='#{v.strip}' " }
@@ -22,11 +23,12 @@ module DataUriImages
       # корректно вели себя - отказывались отображаться в Opera, былы чёрными в
       # FF
       blank_body = "R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
-      blank_gif = "data:image/gif;base64,".concat config.complite_escape ?
+      blank_gif = "data:image/gif;base64,".concat DataUriImages.config.complite_escape ?
           Rack::Utils.escape( blank_body ) : blank_body
       #
       options[:class] ||= "" #  if options[:class].blank?
       # добавляем класс 'uri' и класс соответствующий изображению
+      image_file = image_file[1..-1] if image_file[0] == '/'
       options[:class] += " uri " + image_file.gsub(/\./, "_").gsub(/\//, "_")
       # обрезка лишних пробелов по краям
       options[:class].strip!
@@ -34,15 +36,16 @@ module DataUriImages
       # :class -> "class" ( Symbol -> String )
       options = options.stringify_keys
 
-      # Логи для устаревшего использования опции 'confirm'
-      # Не забыть удалить для будующих версий, для будующих версий Rails. Ах-ха.
-      if confirm = options.delete("confirm")
-        message = 
-            ":confirm option is deprecated and will be removed from Rails 4.1. "
-            "Use 'data: { confirm: \'Text\' }' instead'."
-        ActiveSupport::Deprecation.warn message
-        options["data-confirm"] = confirm
-      end
+      # деприкуха
+      #### Логи для устаревшего использования опции 'confirm'
+      #### Не забыть удалить для будующих версий, для будующих версий Rails. Ах-ха.
+      ###if confirm = options.delete("confirm")
+      ###  message = 
+      ###      ":confirm option is deprecated and will be removed from Rails 4.1. "
+      ###      "Use 'data: { confirm: \'Text\' }' instead'."
+      ###  ActiveSupport::Deprecation.warn message
+      ###  options["data-confirm"] = confirm
+      ###end
 
       tag :input, { "alt" => image_alt(image_file),
                                  "type" => "image",
