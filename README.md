@@ -61,7 +61,7 @@ data:image/svg+xml,&lt;svg height='200' width='200' xmlns='http://www.w3.org/200
 Вобще говоря - <code>SVG</code> с текстом (как в примере выше), мало где отображаются корректно, однако Вы можете скопировать эту строку в адресную строку браузера и взглянуть. Идея навеяна вот от <a href="http://r.va.gg/2012/05/data-uri-svg.html">сюда</a>, а вот тематический <a href="http://jsfiddle.net/rvagg/exULa/">fiddle</a>.</dd>
   <dt><a name="prefix">prefix</a></dt>
   <dd>Дирректорий для поиска, по умолчанию <code>images/uri</code>. Вы можете указать любой другой,
-      но это должен быть один из дирреториев ассетов</dd>
+      но это должен быть один из дирректориев ассетов</dd>
   <dt><a name="encode">encode</a></dt>
   <dd>Метод кодиования - по умолчанию это <code>base64</code>, можно установить в <code>:acsii</code></dd>
   <dt><a name="minimalize_quotes">minimalize_quotes</a></dt>
@@ -77,12 +77,11 @@ data:image/svg+xml,&lt;svg height='200' width='200' xmlns='http://www.w3.org/200
       если итоговы размер от этого уменьшится.
       </dd>
   <dt><a name="replace_hex_to_rgb">replace_hex_to_rgb</a></dt>
-  <dd>Актуально для читого <code>SVG</code> - замена цветов <code>hex</code> на <code>rgb()</code> - имеет смысл в Opera и FF например, т.к. у них проблемы с восприятием неэкранированной решётки <code>#</code>. Переход на <code>rgb()</code> её решает.</dd>
+  <dd>Актуально для чистого (не кодированного) <code>SVG</code> - замена цветов <code>hex</code> на <code>rgb()</code> - имеет смысл в Opera и FF например, т.к. у них проблемы с восприятием неэкранированной решётки <code>#</code>. Переход на <code>rgb()</code> её решает.</dd>
   <dt><a name="complete_escape">complete_escape</a></dt>
-  <dd>Полное экранирование. По умолчанию <code>false</code>. При установке в <code>true</code> Ваш <code>css</code> станет полностью валидным,
-   но от этого серьёзно возрастает размер файла. Кроме того - использование опции <code>.svg = :pure</code> в паре с этой опцией (установленной в <code>true</code>) приведёт краху =). Используйте эту опцию только для <code>base64</code>-кодированных изображений - или не используйте вовсе.</dd>
+  <dd>Полное экранирование. По умолчанию <code>false</code>. При установке в <code>true</code> Ваш <code>css</code> станет полностью валидным, но от этого серьёзно возрастает размер файла. Кроме того - использование опции <code>.svg = :pure</code> в паре с этой опцией (установленной в <code>true</code>) приведёт краху =). Используйте эту опцию только для <code>base64</code>-кодированных изображений - или не используйте вовсе.</dd>
    <dt><a name="apply_for">apply_for</dt>
-   <dd>Это хэш, позволяет добавить собственный селектор по имени файла. Например, если есть желание
+   <dd>Это хэш, позволяет добавить собственный селектор по имени файла (пути к файлу и имении, если быть точным). Например, если есть желание
    к изображению <code>target_blank.svg</code> применить селектор <code>a[href^="http"]</code> - то хэш будет
    таким
 <pre>
@@ -235,7 +234,7 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
   height: 3em;
   width: 3em;
   float: left;
-  padding: .5em;
+  margin: .5em;
 }
 ```
 
@@ -244,7 +243,8 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images'
 
 ## Демо
 
-[**Рабочая демка**](http://data-uri-images-on.herokuapp.com/)&nbsp;[[source](https://github.com/logrusorgru/data-uri-images-on)] и для сравнения &mdash; она же &mdash; но [**без использования гема**](http://data-uri-images-off.herokuapp.com/)&nbsp;[[source](https://github.com/logrusorgru/data-uri-images-off)]
+* [**Рабочая демка**](http://data-uri-images-on.herokuapp.com/)&nbsp;[[source](https://github.com/logrusorgru/data-uri-images-on)]
+* Она же &mdash; но [**без использования гема**](http://data-uri-images-off.herokuapp.com/)&nbsp;[[source](https://github.com/logrusorgru/data-uri-images-off)]
 
 ## IE 6,7,8
 
