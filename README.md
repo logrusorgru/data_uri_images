@@ -56,7 +56,7 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images', :tag => 'v0.0.2
 <div class="highlight highlight-svg"><pre>
 data:image/svg+xml,&lt;svg height='200' width='200' xmlns='http://www.w3.org/2000/svg'&gt;&lt;text x="15" y="15" fill="red" transform="rotate(30 20,40)"&gt;I love SVG&lt;/text&gt;&lt;/svg&gt;
 </pre></div>
-Вобще говоря - <code>SVG</code> с текстом (как в примере выше), мало где отображаются корректно, однако Вы можете скопировать эту строку в адресную строку браузера и взглянуть. Идея навеяна вот от [сюда](http://r.va.gg/2012/05/data-uri-svg.html), а вот тематический [fiddle](http://jsfiddle.net/rvagg/exULa/).</dd>
+Вобще говоря - <code>SVG</code> с текстом (как в примере выше), мало где отображаются корректно, однако Вы можете скопировать эту строку в адресную строку браузера и взглянуть. Идея навеяна вот от <a href="http://r.va.gg/2012/05/data-uri-svg.html">сюда</a>, а вот тематический <a href="http://jsfiddle.net/rvagg/exULa/">fiddle</a>.</dd>
   <dt>prefix</dt>
   <dd>Дирректорий для поиска, по умолчанию <code>images/uri</code>. Вы можете указать любой другой,
       но это должен быть один из дирреториев ассетов</dd>
