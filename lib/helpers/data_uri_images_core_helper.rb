@@ -20,6 +20,7 @@ module DataUriImages
       logger.info "[DtUrImgs]: @@config.minimalize_quotes is #{@@config.minimalize_quotes}"
       logger.info "[DtUrImgs]: @@config.replace_hex_to_rgb is #{@@config.replace_hex_to_rgb}"
       logger.info "[DtUrImgs]: @@config.complete_escape is #{@@config.complete_escape}"
+      logger.info "[DtUrImgs]: @@config.apply_for is #{@@config.apply_for}"
       result = ""
       # результаты записываются в result
       # search_path - путь поиска - путь откуда беруться изображения для
@@ -40,6 +41,11 @@ module DataUriImages
         file.gsub! /^#{search_path}\//, ""
         # Замена точек и '/' на '_'
         result += "/* File: #{file} */\n"
+        # Проверка на доп-стили
+        if @@config.apply_for.include? file
+          result += "#{apply_for[file]}, "
+        end
+        # Замена точек и '/' на '_'
         result += ".#{file.gsub(/\./, "_").gsub(/\//, "_")}"
         # генерация свойства CSS 'background-image'
         result += " { background-image: url( \""

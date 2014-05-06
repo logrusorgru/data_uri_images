@@ -68,6 +68,7 @@ module DataUriImages::Insert
                 app.config.data_uri_images[:replace_hex_to_rgb] || false
         config.complete_escape    =
                 app.config.data_uri_images[:complete_escape] || false
+        config.apply_for          = app.config.data_uri_images[:apply_for] || {}
     	end
 
   	end

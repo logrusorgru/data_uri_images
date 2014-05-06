@@ -23,15 +23,17 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images', :tag => 'v0.0.2
 
 ## Добавлено:
 
-* Добавлена возможность выбирать дирркторий для поиска `prefix`
+* Возможность добавлять свои селекторы по файлу [`apply_for`](#apply_for)
 
-* Добавлена возможность кодировать не только в `base64` но и в `ACSII`
+* Добавлена возможность выбирать дирркторий для поиска [`prefix`](#prefix)
 
-* Добавлена возможность полной маскировки спецсимволов (на выбор)
+* Добавлена возможность кодировать не только в [`base64`](#encode) но и в [`ACSII`](#encode)
 
-* Опции предварительной обработки `SVG` изображений
+* Добавлена возможность полной маскировки спецсимволов [(на выбор)](#compete_escape)
 
-* Возможность не кодировать `SVG` файлы, а использовать их чистыми
+* Опции предварительной обработки `SVG` изображений ([1](#replace_hex_to_rgb)|[2](#minimalize_quotes))
+
+* Возможность не кодировать `SVG` файлы, а использовать их чистыми [`svg`](#svg)
 
 ## Настройки
 
@@ -49,7 +51,7 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images', :tag => 'v0.0.2
 Возможные настройки
 
 <dl>
-  <dt>svg</dt>
+  <dt><a name='svg'>svg</a></dt>
   <dd>Установите значение в <code>:pure</code> если хотите не кодировать <code>SVG</code>-файлы,
       любое другое значение будет кодировать их по методу <code>encode</code> - это значение по умолчанию.
       Пример "чиcтого" <code>svg</code>
@@ -57,12 +59,12 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images', :tag => 'v0.0.2
 data:image/svg+xml,&lt;svg height='200' width='200' xmlns='http://www.w3.org/2000/svg'&gt;&lt;text x="15" y="15" fill="red" transform="rotate(30 20,40)"&gt;I love SVG&lt;/text&gt;&lt;/svg&gt;
 </pre></div>
 Вобще говоря - <code>SVG</code> с текстом (как в примере выше), мало где отображаются корректно, однако Вы можете скопировать эту строку в адресную строку браузера и взглянуть. Идея навеяна вот от <a href="http://r.va.gg/2012/05/data-uri-svg.html">сюда</a>, а вот тематический <a href="http://jsfiddle.net/rvagg/exULa/">fiddle</a>.</dd>
-  <dt>prefix</dt>
+  <dt><a name="prefix">prefix</a></dt>
   <dd>Дирректорий для поиска, по умолчанию <code>images/uri</code>. Вы можете указать любой другой,
       но это должен быть один из дирреториев ассетов</dd>
-  <dt>encode</dt>
+  <dt><a name="encode">encode</a></dt>
   <dd>Метод кодиования - по умолчанию это <code>base64</code>, можно установить в <code>:acsii</code></dd>
-  <dt>minimalize_quotes</dt>
+  <dt><a name="minimalize_quotes">minimalize_quotes</a></dt>
   <dd>Эта опция для актуально только для не кодированных <code>SVG</code>-файлов. По умолчанию установлен в
       <code>false</code>, при установке в <code>true</code> во всех <code>SVG</code>-файлах будет проведена оптимизация количества кавычек.
       Суть в том, что в <code>css</code>-файле это выглядит примерно так
@@ -74,11 +76,25 @@ data:image/svg+xml,&lt;svg height='200' width='200' xmlns='http://www.w3.org/200
       т.е. двойные кавычки маскируются слэшем <code>'\"'</code>. При оптимизации двойные кавычки будут заменены на одинарные,
       если итоговы размер от этого уменьшится.
       </dd>
-  <dt>replace_hex_to_rgb</dt>
+  <dt><a name="replace_hex_to_rgb">replace_hex_to_rgb</a></dt>
   <dd>Актуально для читого <code>SVG</code> - замена цветов <code>hex</code> на <code>rgb()</code> - имеет смысл в Opera и FF например, т.к. у них проблемы с восприятием неэкранированной решётки <code>#</code>. Переход на <code>rgb()</code> её решает.</dd>
   <dt>complete_escape</dt>
   <dd>Полное экранирование. По умолчанию <code>false</code>. При установке в <code>true</code> Ваш <code>css</code> станет полностью валидным,
    но от этого серьёзно возрастает размер файла.</dd>
+   <dt><a name="apply_for">apply_for</dt>
+   <dd>Это хэш, позволяет добавить собственный селектор по имени файла. Например, если есть желание
+   к изображению <code>target_blank.svg</code> применить селектор <code>a[href^="http"]</code> - то хэш будет
+   таким
+<pre>
+config.data_uri_images.apply_for = { 'target_blank.svg' => 'a[href^="http"]' }
+</pre>
+в стилях это будет выглядеть так
+<pre>
+a[href^="http"], target_blank_svg{
+  background-image: url(......
+}
+</pre>
+   </dd>
 </dl>
 
 
