@@ -52,7 +52,7 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images', :tag => 'v0.0.2
   <dt>svg</dt>
   <dd>Установите значение в <pre>:pure</pre> если хотите не кодировать <pre>SVG</pre>-файлы,
       любое другое значение будет кодировать их по методу <pre>encode</pre> - это значение по умолчанию.
-      Пример "читого" <pre>svg</pre>
+      Пример "чиcтого" <pre>svg</pre>
 <div class="highlight highlight-svg"><pre>
 data:image/svg+xml,<svg height='200' width='200' xmlns='http://www.w3.org/2000/svg'><text x="15" y="15" fill="red" transform="rotate(30 20,40)">I love SVG</text></svg>
 </pre></div>
