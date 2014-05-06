@@ -70,7 +70,7 @@ data:image/svg+xml,&lt;svg height='200' width='200' xmlns='http://www.w3.org/200
       Суть в том, что в <code>css</code>-файле это выглядит примерно так
 <div class="highlight highlight-css"><pre>
 .u0_svg{
-  background-image: url("data:image/svg+xml,<svg xmlns=...><path fill=\"#000\"> ... </svg>") !important;
+  background-image: url("data:image/svg+xml,&lt;svg xmlns=...&gt;&lt;path fill=\"#000\"&gt; ... &lt;/svg&gt;") !important;
 }
 </pre></div>
       т.е. двойные кавычки маскируются слэшем <code>'\"'</code>. При оптимизации двойные кавычки будут заменены на одинарные,
