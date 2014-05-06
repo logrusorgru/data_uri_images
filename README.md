@@ -51,7 +51,7 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images', :tag => 'v0.0.2
 Возможные настройки
 
 <dl>
-  <dt><a name='svg'>svg</a></dt>
+  <dt><a name='svg'><span class="octicon octicon-link"></span></a>svg</dt>
   <dd>Установите значение в <code>:pure</code> если хотите не кодировать <code>SVG</code>-файлы,
       любое другое значение будет кодировать их по методу <code>encode</code> - это значение по умолчанию.
       Пример "чиcтого" <code>svg</code>
@@ -59,12 +59,12 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images', :tag => 'v0.0.2
 data:image/svg+xml,&lt;svg height='200' width='200' xmlns='http://www.w3.org/2000/svg'&gt;&lt;text x="15" y="15" fill="red" transform="rotate(30 20,40)"&gt;I love SVG&lt;/text&gt;&lt;/svg&gt;
 </pre></div>
 Вобще говоря - <code>SVG</code> с текстом (как в примере выше), мало где отображаются корректно, однако Вы можете скопировать эту строку в адресную строку браузера и взглянуть. Идея навеяна вот от <a href="http://r.va.gg/2012/05/data-uri-svg.html">сюда</a>, а вот тематический <a href="http://jsfiddle.net/rvagg/exULa/">fiddle</a>.</dd>
-  <dt><a name="prefix">prefix</a></dt>
+  <dt><a name="prefix"><span class="octicon octicon-link"></span></a>prefix</dt>
   <dd>Дирректорий для поиска, по умолчанию <code>images/uri</code>. Вы можете указать любой другой,
       но это должен быть один из дирректориев ассетов</dd>
-  <dt><a name="encode">encode</a></dt>
+  <dt><a name="encode"><span class="octicon octicon-link"></span></a>encode</dt>
   <dd>Метод кодиования - по умолчанию это <code>base64</code>, можно установить в <code>:acsii</code></dd>
-  <dt><a name="minimalize_quotes">minimalize_quotes</a></dt>
+  <dt><a name="minimalize_quotes"><span class="octicon octicon-link"></span></a>minimalize_quotes</dt>
   <dd>Эта опция для актуально только для не кодированных <code>SVG</code>-файлов. По умолчанию установлен в
       <code>false</code>, при установке в <code>true</code> во всех <code>SVG</code>-файлах будет проведена оптимизация количества кавычек.
       Суть в том, что в <code>css</code>-файле это выглядит примерно так
@@ -76,11 +76,11 @@ data:image/svg+xml,&lt;svg height='200' width='200' xmlns='http://www.w3.org/200
       т.е. двойные кавычки маскируются слэшем <code>'\"'</code>. При оптимизации двойные кавычки будут заменены на одинарные,
       если итоговы размер от этого уменьшится.
       </dd>
-  <dt><a name="replace_hex_to_rgb">replace_hex_to_rgb</a></dt>
+  <dt><a name="replace_hex_to_rgb"><span class="octicon octicon-link"></span></a>replace_hex_to_rgb</dt>
   <dd>Актуально для чистого (не кодированного) <code>SVG</code> - замена цветов <code>hex</code> на <code>rgb()</code> - имеет смысл в Opera и FF например, т.к. у них проблемы с восприятием неэкранированной решётки <code>#</code>. Переход на <code>rgb()</code> её решает.</dd>
-  <dt><a name="complete_escape">complete_escape</a></dt>
+  <dt><a name="complete_escape"><span class="octicon octicon-link"></span></a>complete_escape</dt>
   <dd>Полное экранирование. По умолчанию <code>false</code>. При установке в <code>true</code> Ваш <code>css</code> станет полностью валидным, но от этого серьёзно возрастает размер файла. Кроме того - использование опции <code>.svg = :pure</code> в паре с этой опцией (установленной в <code>true</code>) приведёт краху =). Используйте эту опцию только для <code>base64</code>-кодированных изображений - или не используйте вовсе.</dd>
-   <dt><a name="apply_for">apply_for</dt>
+   <dt><a name="apply_for"><span class="octicon octicon-link"></span></a>apply_for</dt>
    <dd>Это хэш, позволяет добавить собственный селектор по имени файла (пути к файлу и имении, если быть точным). Например, если есть желание
    к изображению <code>target_blank.svg</code> применить селектор <code>a[href^="http"]</code> - то хэш будет
    таким
