@@ -43,7 +43,7 @@ module DataUriImages
         result += "/* File: #{file} */\n"
         # Проверка на доп-стили
         if @@config.apply_for.include? file
-          result += "#{apply_for[file]}, "
+          result += "#{@@config.apply_for[file]}, "
         end
         # Замена точек и '/' на '_'
         result += ".#{file.gsub(/\./, "_").gsub(/\//, "_")}"
