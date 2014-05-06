@@ -29,7 +29,7 @@ gem 'data_uri_images', :github => 'logrusorgru/data_uri_images', :tag => 'v0.0.2
 
 * Добавлена возможность кодировать не только в [`base64`](#encode) но и в [`ACSII`](#encode)
 
-* Добавлена возможность полной маскировки спецсимволов [(на выбор)](#compete_escape)
+* Добавлена возможность полной маскировки спецсимволов [(на выбор)](#complete_escape)
 
 * Опции предварительной обработки `SVG` изображений ([1](#replace_hex_to_rgb)|[2](#minimalize_quotes))
 
@@ -78,7 +78,7 @@ data:image/svg+xml,&lt;svg height='200' width='200' xmlns='http://www.w3.org/200
       </dd>
   <dt><a name="replace_hex_to_rgb">replace_hex_to_rgb</a></dt>
   <dd>Актуально для читого <code>SVG</code> - замена цветов <code>hex</code> на <code>rgb()</code> - имеет смысл в Opera и FF например, т.к. у них проблемы с восприятием неэкранированной решётки <code>#</code>. Переход на <code>rgb()</code> её решает.</dd>
-  <dt>complete_escape</dt>
+  <dt><a name="complete_escape">complete_escape</a></dt>
   <dd>Полное экранирование. По умолчанию <code>false</code>. При установке в <code>true</code> Ваш <code>css</code> станет полностью валидным,
    но от этого серьёзно возрастает размер файла.</dd>
    <dt><a name="apply_for">apply_for</dt>
