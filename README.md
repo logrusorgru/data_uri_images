@@ -68,7 +68,7 @@ data:image/svg+xml,&lt;svg height='200' width='200' xmlns='http://www.w3.org/200
   <dd>Эта опция для актуально только для не кодированных <code>SVG</code>-файлов. По умолчанию установлен в
       <code>false</code>, при установке в <code>true</code> во всех <code>SVG</code>-файлах будет проведена оптимизация количества кавычек.
       Суть в том, что в <code>css</code>-файле это выглядит примерно так
-<div class="highlight highlight-css"><pre>
+<div><pre>
 .u0_svg{
   background-image: url("data:image/svg+xml,&lt;svg xmlns=...&gt;&lt;path fill=\"#000\"&gt; ... &lt;/svg&gt;") !important;
 }
@@ -80,7 +80,7 @@ data:image/svg+xml,&lt;svg height='200' width='200' xmlns='http://www.w3.org/200
   <dd>Актуально для читого <code>SVG</code> - замена цветов <code>hex</code> на <code>rgb()</code> - имеет смысл в Opera и FF например, т.к. у них проблемы с восприятием неэкранированной решётки <code>#</code>. Переход на <code>rgb()</code> её решает.</dd>
   <dt><a name="complete_escape">complete_escape</a></dt>
   <dd>Полное экранирование. По умолчанию <code>false</code>. При установке в <code>true</code> Ваш <code>css</code> станет полностью валидным,
-   но от этого серьёзно возрастает размер файла.</dd>
+   но от этого серьёзно возрастает размер файла. Кроме того - использование опции <code>.svg = :pure</code> в паре с этой опцией (установленной в <code>true</code>) приведёт краху =). Используйте эту опцию только для <code>base64</code>-кодированных изображений - или не используйте вовсе.</dd>
    <dt><a name="apply_for">apply_for</dt>
    <dd>Это хэш, позволяет добавить собственный селектор по имени файла. Например, если есть желание
    к изображению <code>target_blank.svg</code> применить селектор <code>a[href^="http"]</code> - то хэш будет
@@ -90,7 +90,7 @@ config.data_uri_images.apply_for = { 'target_blank.svg' => 'a[href^="http"]' }
 </pre>
 в стилях это будет выглядеть так
 <pre>
-a[href^="http"], target_blank_svg{
+a[href^="http"], .target_blank_svg{
   background-image: url(......
 }
 </pre>
